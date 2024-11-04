@@ -1,4 +1,8 @@
-# Example Notebook Servers
+# Notebook Servers
+[![publish](https://github.com/oneblock-ai/notebook-images/actions/workflows/notebook_servers_publish.yaml/badge.svg)](https://github.com/oneblock-ai/notebook-images/actions/workflows/notebook_servers_publish.yaml)
+[![Releases](https://img.shields.io/github/release/oneblock-ai/notebook-images.svg)](https://github.com/oneblock-ai/notebook-images/releases)
+
+> Note: this is a fork of the original Kubeflow [notebook servers](https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers), with the intention of providing a maintained set of notebook images for 1Block.AI.
 
 > These images are provided as __examples__, and are supported on a best-effort basis.
 > <br>
@@ -10,41 +14,37 @@ This chart shows how the images are related to each other (the nodes are clickab
 
 ```mermaid
 graph TD
-  Base[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/base'>Base</a>] --> Jupyter[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter'>Jupyter</a>]
-  Base --> Code-Server[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/codeserver'>code-server</a>]
-  Base --> RStudio[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/rstudio'>RStudio</a>]
+  Base[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/base'>Base</a>] --> Jupyter[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter'>Jupyter</a>]
+  Base --> Code-Server[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/codeserver'>code-server</a>]
+  Base --> RStudio[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/rstudio'>RStudio</a>]
+  
+  Jupyter --> PyTorch[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-pytorch'>PyTorch</a>]
+  Jupyter --> SciPy[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-scipy'>SciPy</a>]
+  Jupyter --> TensorFlow[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-tensorflow'>TensorFlow</a>]
+  
+  Code-Server --> Code-Server-Conda-Python[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/codeserver-python'>Conda Python</a>]
+  RStudio --> Tidyverse[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/rstudio-tidyverse'>Tidyverse</a>]
 
-  Jupyter --> PyTorch[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch'>PyTorch</a>]
-  Jupyter --> SciPy[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-scipy'>SciPy</a>]
-  Jupyter --> TensorFlow[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-tensorflow'>TensorFlow</a>]
+  PyTorch --> PyTorchFull[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-pytorch-full'>PyTorch Full</a>]
+  TensorFlow --> TensorFlowFull[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-tensorflow-full'>TensorFlow Full</a>]
 
-  Code-Server --> Code-Server-Conda-Python[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/codeserver-python'>Conda Python</a>]
-  RStudio --> Tidyverse[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/rstudio-tidyverse'>Tidyverse</a>]
+  Jupyter --> PyTorchCuda[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-pytorch-cuda'>PyTorch CUDA</a>]
+  Jupyter --> TensorFlowCuda[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-tensorflow-cuda'>TensorFlow CUDA</a>]
 
-  PyTorch --> PyTorchFull[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch-full'>PyTorch Full</a>]
-  TensorFlow --> TensorFlowFull[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-tensorflow-full'>TensorFlow Full</a>]
-
-  Jupyter --> PyTorchCuda[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch-cuda'>PyTorch CUDA</a>]
-  Jupyter --> TensorFlowCuda[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-tensorflow-cuda'>TensorFlow CUDA</a>]
-
-  PyTorchCuda --> PyTorchCudaFull[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch-cuda-full'>PyTorch CUDA Full</a>]
-  TensorFlowCuda --> TensorFlowCudaFull[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-tensorflow-cuda-full'>TensorFlow CUDA Full</a>]
-
-  Jupyter --> PyTorchGaudi[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch-gaudi'>PyTorch Gaudi</a>]
-  PyTorchGaudi --> PyTorchGaudiFull[<a href='https://github.com/kubeflow/kubeflow/tree/master/components/example-notebook-servers/jupyter-pytorch-gaudi-full'>PyTorch Gaudi Full</a>]
-
+  PyTorchCuda --> PyTorchCudaFull[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-pytorch-cuda-full'>PyTorch CUDA Full</a>]
+  TensorFlowCuda --> TensorFlowCudaFull[<a href='https://github.com/oneblock-ai/notebook-images/tree/main/jupyter-tensorflow-cuda-full'>TensorFlow CUDA Full</a>]
 ```
 
 ### Base Images
 
 These images provide a common starting point for Kubeflow Notebook containers.
 
-Dockerfile | Container Registry | Notes
---- | --- | ---
-[`./base`](./base) | [`kubeflownotebookswg/base`](https://hub.docker.com/r/kubeflownotebookswg/base) | Common Base Image
-[`./codeserver`](./codeserver) | [`kubeflownotebookswg/codeserver`](https://hub.docker.com/r/kubeflownotebookswg/codeserver) | [code-server](https://github.com/coder/code-server) (Visual Studio Code)
-[`./jupyter`](./jupyter) | [`kubeflownotebookswg/jupyter`](https://hub.docker.com/r/kubeflownotebookswg/jupyter) | [JupyterLab](https://github.com/jupyterlab/jupyterlab)
-[`./rstudio`](./rstudio) | [`kubeflownotebookswg/rstudio`](https://hub.docker.com/r/kubeflownotebookswg/rstudio) | [RStudio](https://github.com/rstudio/rstudio)
+Dockerfile | Container Registry                                                                          | Notes
+--- |---------------------------------------------------------------------------------------------| ---
+[`./base`](./base) | [`oneblockai/notebook-base`](https://hub.docker.com/r/oneblockai/notebook-base)             | Common Base Image
+[`./codeserver`](./codeserver) | [`oneblockai/codeserver`](https://hub.docker.com/r/oneblockai/codeserver) | [code-server](https://github.com/coder/code-server) (Visual Studio Code)
+[`./jupyter`](./jupyter) | [`oneblockai/jupyter`](https://hub.docker.com/r/oneblockai/jupyter)       | [JupyterLab](https://github.com/jupyterlab/jupyterlab)
+[`./rstudio`](./rstudio) | [`oneblockai/rstudio`](https://hub.docker.com/r/oneblockai/rstudio)       | [RStudio](https://github.com/rstudio/rstudio)
 
 ### Kubeflow Images
 
@@ -52,19 +52,17 @@ These images extend the [base images](#images--base) with common packages used i
 
 Dockerfile | Container Registry | Notes
 --- | --- | ---
-[`./codeserver-python`](./codeserver-python) | [`kubeflownotebookswg/codeserver-python`](https://hub.docker.com/r/kubeflownotebookswg/codeserver-python) | code-server + Conda Python
-[`./rstudio-tidyverse`](./rstudio-tidyverse) | [`kubeflownotebookswg/rstudio-tidyverse`](https://hub.docker.com/r/kubeflownotebookswg/rstudio-tidyverse) | RStudio + [Tidyverse](https://www.tidyverse.org/)
-[`./jupyter-pytorch`](./jupyter-pytorch) | [`kubeflownotebookswg/jupyter-pytorch`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch) | JupyterLab + PyTorch
-[`./jupyter-pytorch-full`](./jupyter-pytorch-full) | [`kubeflownotebookswg/jupyter-pytorch-full`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch-full) | JupyterLab + PyTorch + Common Packages
-[`./jupyter-pytorch-cuda`](./jupyter-pytorch-cuda) | [`kubeflownotebookswg/jupyter-pytorch-cuda`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch-cuda) | JupyterLab + PyTorch + CUDA
-[`./jupyter-pytorch-cuda-full`](./jupyter-pytorch-cuda-full) | [`kubeflownotebookswg/jupyter-pytorch-cuda-full`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch-cuda-full) | JupyterLab + PyTorch + CUDA + Common Packages
-[`./jupyter-pytorch-gaudi`](./jupyter-pytorch-gaudi) | [`kubeflownotebookswg/jupyter-pytorch-gaudi`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch-gaudi) | JupyterLab + PyTorch + Intel Gaudi
-[`./jupyter-pytorch-gaudi-full`](./jupyter-pytorch-gaudi-full) | [`kubeflownotebookswg/jupyter-pytorch-gaudi-full`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-pytorch-gaudi-full) | JupyterLab + PyTorch + Intel Gaudi + Common Packages
-[`./jupyter-scipy`](./jupyter-scipy) | [`kubeflownotebookswg/jupyter-scipy`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-scipy) | JupyterLab + Common Packages
-[`./jupyter-tensorflow`](./jupyter-tensorflow) | [`kubeflownotebookswg/jupyter-tensorflow`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-tensorflow) | JupyterLab + TensorFlow
-[`./jupyter-tensorflow-full`](./jupyter-tensorflow-full) | [`kubeflownotebookswg/jupyter-tensorflow-full`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-tensorflow-full) | JupyterLab + TensorFlow + Common Packages
-[`./jupyter-tensorflow-cuda`](./jupyter-tensorflow-cuda) | [`kubeflownotebookswg/jupyter-tensorflow-cuda`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-tensorflow-cuda) | JupyterLab + TensorFlow + CUDA
-[`./jupyter-tensorflow-cuda-full`](./jupyter-tensorflow-cuda-full) | [`kubeflownotebookswg/jupyter-tensorflow-cuda-full`](https://hub.docker.com/r/kubeflownotebookswg/jupyter-tensorflow-cuda-full) | JupyterLab + TensorFlow + CUDA + Common Packages
+[`./codeserver-python`](./codeserver-python) | [`oneblockai/codeserver-python`](https://hub.docker.com/r/oneblockai/codeserver-python) | code-server + Conda Python
+[`./rstudio-tidyverse`](./rstudio-tidyverse) | [`oneblockai/rstudio-tidyverse`](https://hub.docker.com/r/oneblockai/rstudio-tidyverse) | RStudio + [Tidyverse](https://www.tidyverse.org/)
+[`./jupyter-pytorch`](./jupyter-pytorch) | [`oneblockai/jupyter-pytorch`](https://hub.docker.com/r/oneblockai/jupyter-pytorch) | JupyterLab + PyTorch
+[`./jupyter-pytorch-full`](./jupyter-pytorch-full) | [`oneblockai/jupyter-pytorch-full`](https://hub.docker.com/r/oneblockai/jupyter-pytorch-full) | JupyterLab + PyTorch + Common Packages
+[`./jupyter-pytorch-cuda`](./jupyter-pytorch-cuda) | [`oneblockai/jupyter-pytorch-cuda`](https://hub.docker.com/r/oneblockai/jupyter-pytorch-cuda) | JupyterLab + PyTorch + CUDA
+[`./jupyter-pytorch-cuda-full`](./jupyter-pytorch-cuda-full) | [`oneblockai/jupyter-pytorch-cuda-full`](https://hub.docker.com/r/oneblockai/jupyter-pytorch-cuda-full) | JupyterLab + PyTorch + CUDA + Common Packages
+[`./jupyter-scipy`](./jupyter-scipy) | [`oneblockai/jupyter-scipy`](https://hub.docker.com/r/oneblockai/jupyter-scipy) | JupyterLab + Common Packages
+[`./jupyter-tensorflow`](./jupyter-tensorflow) | [`oneblockai/jupyter-tensorflow`](https://hub.docker.com/r/oneblockai/jupyter-tensorflow) | JupyterLab + TensorFlow
+[`./jupyter-tensorflow-full`](./jupyter-tensorflow-full) | [`oneblockai/jupyter-tensorflow-full`](https://hub.docker.com/r/oneblockai/jupyter-tensorflow-full) | JupyterLab + TensorFlow + Common Packages
+[`./jupyter-tensorflow-cuda`](./jupyter-tensorflow-cuda) | [`oneblockai/jupyter-tensorflow-cuda`](https://hub.docker.com/r/oneblockai/jupyter-tensorflow-cuda) | JupyterLab + TensorFlow + CUDA
+[`./jupyter-tensorflow-cuda-full`](./jupyter-tensorflow-cuda-full) | [`oneblockai/jupyter-tensorflow-cuda-full`](https://hub.docker.com/r/oneblockai/jupyter-tensorflow-cuda-full) | JupyterLab + TensorFlow + CUDA + Common Packages
 
 ## Package Installation
 
