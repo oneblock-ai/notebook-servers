@@ -145,7 +145,7 @@ For example, to build the [`./jupyter-scipy`](./jupyter-scipy) image:
 
 ```bash
 # from the root of the repository
-cd components/example-notebook-servers/jupyter-scipy
+cd jupyter-scipy
 
 # optionally define a version tag
 #  default: sha-{GIT_COMMIT}{GIT_TREE_STATE}
@@ -164,7 +164,7 @@ To build the image for different CPU architectures, you can use the following co
 
 ```bash
 # from the root of the repository
-cd components/example-notebook-servers/jupyter-scipy
+cd jupyter-scipy
 
 # optionally define a version tag
 #export TAG="X.Y.Z-patch.N"
@@ -197,7 +197,7 @@ For example, to build all images:
 
 ```bash
 # from the root of the repository
-cd components/example-notebook-servers
+echo $(pwd)
 
 # optionally define a version tag
 #export TAG="X.Y.Z-patch.N"
@@ -214,7 +214,7 @@ To build the images for different CPU architectures, you can use the following c
 
 ```bash
 # from the root of the repository
-cd components/example-notebook-servers
+echo $(pwd)
 
 # optionally define a version tag
 #export TAG="X.Y.Z-patch.N"

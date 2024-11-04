@@ -49,15 +49,15 @@ jobs:
       - name: Build and Push Notebook Server images
         env:
           ARCH: ${{ inputs.build_arch }}
-          IMAGE_FOLDERS: ${{ inputs.image_folders }}
           SHOULD_TAG_LATEST: ${{ github.ref == 'refs/heads/main' }}
           SHOULD_TAG_VERSION: ${{ github.ref_type == 'tag' }}
           GIT_TAG: ${{ github.ref_name }}
+          IMAGE_FOLDERS: ${{ inputs.image_folders }}
         run: |
           if [[ "$SHOULD_TAG_LATEST" = "true" ]]; then
             export ALSO_TAG_LATEST=1
           fi
           if [[ "$SHOULD_TAG_VERSION" = "true" ]]; then
-              export ALSO_TAG_VERSION=$(GIT_TAG)
+              export ALSO_TAG_VERSION="$GIT_TAG"
           fi
           make docker-build-push-multi-arch

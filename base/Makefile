@@ -18,7 +18,7 @@ GIT_TREE_STATE := $(shell test -n "`git status --porcelain`" && echo "-dirty" ||
 REGISTRY ?= docker.io/kubeflownotebookswg
 TAG      ?= sha-$(GIT_COMMIT)$(GIT_TREE_STATE)
 
-IMAGE_NAME := base
+IMAGE_NAME := notebook-base
 
 BASE_IMAGE         := ubuntu:22.04
 BASE_IMAGE_FOLDERS :=

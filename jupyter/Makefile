@@ -20,7 +20,7 @@ TAG      ?= sha-$(GIT_COMMIT)$(GIT_TREE_STATE)
 
 IMAGE_NAME := jupyter
 
-BASE_IMAGE         := $(REGISTRY)/base:$(TAG)
+BASE_IMAGE         := $(REGISTRY)/notebook-base:$(TAG)
 BASE_IMAGE_FOLDERS := base
 
 # we use a separate registry-type cache to keep the main registry clean

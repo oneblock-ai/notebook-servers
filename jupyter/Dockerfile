@@ -8,6 +8,12 @@ FROM $BASE_IMG
 ARG TARGETARCH
 
 USER root
+# install - usefull linux packages
+RUN apt-get -yq update \
+ && apt-get -yq install --no-install-recommends \
+    build-essential \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 # args - software versions
 # https://github.com/jupyterlab/jupyterlab/releases
