@@ -1,0 +1,2 @@
+# elyra extensions
+elyra==3.15.0
