@@ -66,6 +66,16 @@ jobs:
       image_folders: |
         jupyter-scipy
 
+  jupyter_pipeline_images:
+    name: Build & Push - Jupyter (Elyra Pipeline)
+    uses: ./.github/workflows/notebook_servers_publish_TEMPLATE.yaml
+    needs: [ jupyter_images ]
+    secrets: inherit
+    with:
+      build_arch: linux/amd64,linux/arm64
+      image_folders: |
+        jupyter-pipeline
+
   jupyter_pytorch_images:
     name: Build & Push - Jupyter (PyTorch)
     uses: ./.github/workflows/notebook_servers_publish_TEMPLATE.yaml
