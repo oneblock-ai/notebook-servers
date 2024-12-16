@@ -8,7 +8,7 @@ on:
       - "v*"
 
 env:
-  REGISTRY: ${{ vars.DOCKER_REGISTRY || 'docker.io/oneblockai' }}
+  REGISTRY: ${{ vars.REGISTRY || 'ghcr.io/oneblock-ai' }}
 
 permissions:
   contents: write
