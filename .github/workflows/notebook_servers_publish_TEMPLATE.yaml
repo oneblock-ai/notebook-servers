@@ -16,7 +16,7 @@ permissions:
   packages: write
 
 env:
-  REGISTRY: ${{ vars.DOCKER_REGISTRY || 'docker.io/oneblockai' }}
+  REGISTRY: ${{ vars.REGISTRY || 'ghcr.io/oneblock-ai' }}
   CACHE_IMAGE: ghcr.io/${{ github.repository }}/build-cache
 
 jobs:
